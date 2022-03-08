@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}
+Cisco Healthcare Service - Available Doctors
+{%endblock title %}
+{% block content %}
+{% if service_unavailable %}
+<br />
+<br />
+<br />
+<div class="container text-center">
+  <h1 class="display-4 text-muted">
+    We are sorry <i class="far fa-sad-tear"></i> <br />
+    The "Search Doctor" service is not available at the moment.
+  </h1>
+  <a class="btn btn-primary btn-lg" href="/buyticket" role="button">Buy!</a>
+</div>
+<br />
+{% else %}
+
+  <form method="post" action="/confirmBooking" name="offerForm" id="offerForm">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">Doctor's availability</h1>
+      <p class="lead">
+        Here are the list of availabe doctors. Just select the one you like it and proceed to book a visit.
+      </p>
+    </div>
+    <div class="container-fluid">
+
+
+      <div class="row text-center">
+
+
+
+        {% for offer in offers %}
+
+
+
+        <div class="col-sm-5">
+          <div class="card">
+            <h5 class="card-header">Dr. {{offer.doctor}}</h5>
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{offer.category}}</h6>
+              <p class="card-text">Specialized in {{offer.specialty}}.
+                <br>
+                Hospital: {{offer.hospital}}
+              </p>
+              <span class="btn btn-dark disabled">Price: {{offer.price}}£</span>
+              <a href="javascript:fillForm({{ loop.index0 }})" class="btn btn-outline-primary">Book a visit</a>
+            </div>
+          </div>
+          <br>
+        </div>
+
+        {% endfor %}
+      </div>
+
+
+      <input type="hidden" name="category" id="category" />
+      <input type="hidden" name="doctor" id="doctor" />
+      <input type="hidden" name="specialty" id="specialty" />
+      <input type="hidden" name="price" id="price" />
+      <input type="hidden" name="hospital" id="hospital" />
+
+  </form>
+
+  <script>
+    function fillForm(j_index) {
+      var offer = JSON.parse(offerList[j_index]);
+      console.log(JSON.stringify(offer));
+      $('#category').val(offer.category);
+      $('#doctor').val(offer.doctor);
+      $('#specialty').val(offer.specialty);
+      $('#price').val(offer.price);
+      $('#hospital').val(offer.hospital);
+      $('#offerForm').submit();
+    }
+
+
+    var offerList = [
+      {% for offer in offers %}
+    '{"category": "{{ offer["category"] }}", \
+            "doctor": "{{ offer["doctor"] }}", \
+            "specialty": "{{ offer["specialty"] }}", \
+            "price": "{{ offer["price"] }}", \
+            "hospital": "{{ offer["hospital"] }}"}',
+
+      {% endfor %}
+          ]
+    console.log({{ offerList }});
+  </script>
+
+{% endif %} {% endblock %}

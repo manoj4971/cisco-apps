@@ -1,0 +1,120 @@
+##################################################################################################
+# Frontend service
+##################################################################################################
+
+apiVersion: v1
+data:
+  shim.js: |-
+   require("appdynamics").profile({
+        controllerHostName: 'accenturegmbh-nfr.saas.appdynamics.com',
+        controllerPort: 80,
+        controllerSslEnabled: false,
+        accountName: 'accenturegmbh-nfr',
+        accountAccessKey: '4nbzn46s26ea',
+        applicationName: 'healthcare',
+        tierName: 'frontend',
+        nodeName: 'frontend',
+        analyticsHostName: 'accenturegmbh-nfr.saas.appdynamics.com',
+        analyticsPort: 443,
+        analyticsSslEnabled: true,
+        analytics: {
+              host: 'appdynamics',
+              port: 9090,
+            SSL: false }});
+        require("./frontend.js")
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: appd-nodejs-cm
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: frontend
+    version: "1"
+  name: frontend
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: frontend
+    version: "1"
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+        version: "1"
+    spec:
+      containers:
+      - env:
+        - name: CALENDAR_SERVICE
+          value: "calendar"
+        - name: CALENDAR_PORT
+          value: "5050"
+        - name: REDIS_SERVICE
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: BOOKING_SERVICE
+          value: "booking"
+        - name: BOOKING_PORT
+          value: "5001"
+        - name: REFUND_SERVICE
+          value: "refund"
+        - name: REFUND_PORT
+          value: "5050"
+        - name: OFFER_SERVICE
+          value: "offers"
+        - name: SEARCH_SERVICE
+          value: "search"
+        - name: SEARCH_PORT
+          value: "5051"
+        - name: APPD_PROXY_CONTROL_PATH
+          value: /tmp/appd/run
+        name: frontend
+        image: gcr.io/acn-mccm/healthcare-frontend:v1.0
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: shared-data
+            mountPath: /tmp/appd/run
+          - name: agent-config
+            mountPath: /shim.js
+            subPath: shim.js
+        ports:
+        - containerPort: 5000
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: shared-data
+        emptyDir: {}
+      - name: agent-config
+        configMap:
+          name: appd-nodejs-cm

@@ -1,0 +1,57 @@
+{% extends "base.html" %} 
+
+{% block title %} 
+Cisco Healthcare Center
+{% endblock title%} 
+
+{% block content %}
+
+<main role="main">
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <br>
+      <h1 class="display-3">Cisco Healthcare Center</h1>
+      <p>
+        Welcome to Cisco Healthcare Center
+        We are here to help you find the right doctor for you. 
+        <br>Please select the type of visit, and we will be more than happy to book on behalf of you.
+        
+        <br>
+        <br>
+
+
+        <form method="POST" action="/search?category=">
+          <div class="row">
+            <div class="col">
+              <select id="category" name="category" class="form-control">
+                <option value="" selected disabled>Search for treatment</option>
+                <option>Cardiologist</option>
+                <option>Orthopedic</option>
+                <option>Pulmonologist</option>
+                <option>Plastic Surgery</option>
+                <option>Surgical visit</option>
+                <option>Unconventional</option>
+              </select>
+               </div>
+            <div class="col">
+              <button type="submit" class="btn btn-primary btn-lg">Search </button>
+            </div>
+          </div>
+        </form>
+        <small>A small fee is included in the doctor's rate, to support our HealthCare Center App.</small>
+
+
+      </p>
+    </div>
+
+    
+  </div>
+  <div class="row-fluid frontend-version">
+
+  </div>
+
+  <!-- /container -->
+</main>
+
+{% endblock %}

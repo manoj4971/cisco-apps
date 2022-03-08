@@ -1,0 +1,42 @@
+{
+  "name": "survivor-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Survivor application - Cisco Live 2020 - Barcelona",
+  "author": "Riccardo Tortorici (rtortori@cisco.com)",
+  "main": "frontend.js",
+  "scripts": {
+    "start": "node shim.js"
+  },
+  "dependencies": {
+    "appdynamics": "^21.1.0",
+    "body-parser": "^1.19.0",
+    "connect": "^3.7.0",
+    "console-stamp": "^0.2.9",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "express-winston": "^4.2.0",
+    "nunjucks": "^3.2.3",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
+    "redis": "^2.8.0",
+    "request": "^2.88.0",
+    "swagger-autogen": "^2.12.6",
+    "swagger-ui-express": "^4.1.4",
+    "winston": "^3.3.3"
+  },
+  "nodemonConfig": {
+    "env": {
+      "REDIS_SERVICE": "34.71.207.186",
+      "REDIS_PORT": 6379,
+      "REFUND_SERVICE": "130.211.124.22",
+      "REFUND_PORT": 5050,
+      "BOOKING_SERVICE": "localhost",
+      "BOOKING_PORT": 5001,
+      "CALENDAR_SERVICE": "34.121.61.250",
+      "CALENDAR_PORT": 5050,
+      "SEARCH_SERVICE": "35.202.189.49",
+      "SEARCH_PORT": 5051
+    }
+  },
+  "license": "ISC"
+}

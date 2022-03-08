@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="/img/rmlab.png"/>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport"  content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" crossorigin="anonymous">
+    <!-- Custom CSS Entries-->
+    <link rel="stylesheet"  href="/css/main.css" crossorigin="anonymous"
+    />
+
+    <!-- Font Awesome -->
+    <link  rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+
+    
+    <title>
+      {% block title %} {% endblock title %}
+    </title>
+<script src="/js/nunjucks.js"></script>
+
+<!-- AppDynamics BRUM -->
+<script charset="UTF-8" type="text/javascript">
+  window["adrum-start-time"] = new Date().getTime();
+  (function(config){
+      config.appKey = "AD-AAB-ABH-MDJ";
+      config.adrumExtUrlHttp = "http://cdn.appdynamics.com";
+      config.adrumExtUrlHttps = "https://cdn.appdynamics.com";
+      config.beaconUrlHttp = "http://pdx-col.eum-appdynamics.com";
+      config.beaconUrlHttps = "https://pdx-col.eum-appdynamics.com";
+      config.resTiming = {"bufSize":200,"clearResTimingOnBeaconSend":true};
+      config.maxUrlLength = 512;
+  })(window["adrum-config"] || (window["adrum-config"] = {}));
+  </script>
+  <script src="//cdn.appdynamics.com/adrum/adrum-21.6.0.3448.js"></script>
+
+  </head>
+  <body>  
+    <script src="/js/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="/js/popper.min.js" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/index"
+              ><i class="fas fa-home fa-lg"></i>
+              <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/search">Search All Doctors</a>
+          </li>
+          <li class="nav-item disabled">
+            <a class="nav-link" href="/complaint">Send a complaint</a>
+          </li>
+          <li class="nav-item  dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="dropdown01"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Links
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a
+                class="dropdown-item"
+                href="https://software.cisco.com"
+                target="_blank"
+                >Download Cisco Software</a
+              >
+              <a
+                class="dropdown-item"
+                href="https://intersight.com/help"
+                target="_blank"
+                >Cisco Interisght Help Page</a
+              >
+              <a
+                class="dropdown-item"
+                href="https://docs.appdynamics.com/"
+                target="_blank"
+                >AppDynamics Docs</a
+              >
+              <a
+              class="dropdown-item"
+              href="https://docs.thousandeyes.com/"
+              target="_blank"
+              >ThousandEyes Docs</a
+            >
+            </div>
+          </li>
+        </ul>
+          <a class="btn btn-outline-light" href="/patients">Appointment List</a>
+          .
+          <a class="btn btn-outline-light" href="/refunded">Canceled Appointment</a>
+        
+      </div>
+    </nav>
+
+    <br>
+    <br>
+    {%block content%} 
+    {%endblock%}
+    
+    <hr />
+
+    <footer class="blockquote-footer row">
+      <img
+        alt="RMLAB Logo"
+        src="/img/rmlab.png"
+        width="42px"
+        height="34px"
+      />
+      <p>Made with love at RMLAB | sgioia@cisco.com</p>
+    </footer>
+  </body>
+</html>

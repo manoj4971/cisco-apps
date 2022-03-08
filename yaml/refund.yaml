@@ -1,0 +1,98 @@
+##################################################################################################
+# Refund service
+##################################################################################################
+
+apiVersion: v1
+data:
+  shim.js: |-
+    require("appdynamics").profile({
+        controllerHostName: 'accenturegmbh-nfr.saas.appdynamics.com',
+        controllerPort: 80,
+        controllerSslEnabled: false,
+        accountName: 'accenturegmbh-nfr',
+        accountAccessKey: '4nbzn46s26ea',
+        applicationName: 'healthcare',
+        tierName: 'refundService',
+        nodeName: 'refundService',
+        analyticsHostName: 'accenturegmbh-nfr.saas.appdynamics.com',
+        analyticsPort: 443,
+        analyticsSslEnabled: true,
+        analytics: {
+              host: 'appd-infraviz.appdynamics',
+              port: 9090,
+            SSL: false }});
+        require("./refund.js")
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: appd-nodejs-cm
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: refund
+    version: "1"
+  name: refund
+spec:
+  ports:
+  - port: 5050
+    protocol: TCP
+    targetPort: 5050
+  selector:
+    app: refund
+    version: "1"
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: refund
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: refund
+  template:
+    metadata:
+      labels:
+        app: refund
+        version: "1"
+    spec:
+      containers:
+      - env:
+        - name: REDIS_SERVICE
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: APPD_PROXY_CONTROL_PATH
+          value: /tmp/appd/run
+        name: refund
+        image: gcr.io/acn-mccm/healthcare-refund:v1.0
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: agent-config
+            mountPath: /shim.js
+            subPath: shim.js
+        ports:
+        - containerPort: 5050
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 5050
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5050
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+        - name: agent-config
+          configMap:
+            name: appd-nodejs-cm

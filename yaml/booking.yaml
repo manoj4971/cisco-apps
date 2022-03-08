@@ -1,0 +1,102 @@
+##################################################################################################
+# Booking service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: booking
+    version: "1"
+  name: booking
+spec:
+  ports:
+  - port: 5001
+    protocol: TCP
+    targetPort: 5001
+  selector:
+    app: booking
+    version: "1"
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: agent-config-python-booking
+data:
+  agent.cfg: |-
+    [agent]
+    app = healthcare
+    tier = bookingService
+    node = bookingService
+    [controller]
+    host = APPD_HOST
+    port = APPD_PORT
+    ssl = off
+    account = APPD_ACCOUNT
+    accesskey = APPD_ACCOUNT_ACCESS_KEY
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: booking
+  template:
+    metadata:
+      labels:
+        app: booking
+        version: "1"
+    spec:
+      containers:
+      - env:
+        - name: EXT_SERVICE
+          value: URL_OF_EXTERNAL_SERVICE
+        - name: REDIS_SERVICE
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: APPD_PROXY_CONTROL_PATH
+          value: /tmp/appd/run
+        name: booking
+        image: gcr.io/acn-mccm/healthcare-booking:v1.0
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: shared-data
+            mountPath: /tmp/appd/run
+          - name: agent-config
+            mountPath: /opt/appdynamics/agent.cfg
+            subPath: agent.cfg
+        ports:
+        - containerPort: 5001
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 5001
+          initialDelaySeconds: 5
+          periodSeconds: 120
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 5001
+          initialDelaySeconds: 5
+          periodSeconds: 120
+      - name: proxy
+        image: gcr.io/acn-mccm/sashaz/python-proxy:v1.0
+        imagePullPolicy: Always
+        env:
+          - name: APPD_PROXY_CONTROL_PATH
+            value: /tmp/appd/run
+        volumeMounts:
+        - name: shared-data
+          mountPath: /tmp/appd/run
+      volumes:
+      - name: shared-data
+        emptyDir: {}
+      - name: agent-config
+        configMap:
+          name: agent-config-python-booking

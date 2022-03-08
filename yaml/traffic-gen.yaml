@@ -1,0 +1,30 @@
+##################################################################################################
+# RoadRunner service
+################################################################################################## 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: roadrunner-healthcare
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: roadrunner
+  template: 
+    metadata: 
+      labels: 
+        app: roadrunner
+        version: "1"
+    spec: 
+      containers: 
+        - 
+          env: 
+            - 
+              name: TEST_URL
+              value: INSERT_FRONTEND_URL
+            - 
+              name: TEST_PORT
+              value: "80"
+          image: gcr.io/acn-mccm/healthcare-roadrunner:v1.0
+          imagePullPolicy: Always
+          name: roadrunner

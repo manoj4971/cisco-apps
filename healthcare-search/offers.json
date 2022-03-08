@@ -1,0 +1,100 @@
+[
+  {
+    "category": "Unconventional",
+    "doctor": "Doctor Who",
+    "specialty": "Everything",
+    "price": 400,
+    "hospital": "The Tardis"
+  },
+  {
+    "category": "Surgical visit",
+    "doctor": "Victor Frankenstein",
+    "specialty": "Resurrection",
+    "price": 15,
+    "hospital": "Frankenstein's Lab, Ingolstadt"
+  },
+  {
+    "category"  : "Unconventional",
+    "doctor"    : "Leonard McCoy",
+    "specialty" : "Unconventional treatments",
+    "price"     : 200,
+    "hospital"  : "USS Enterprise NCC 1701"
+  },
+  {
+    "category"  : "Cardiologist",
+    "doctor"    : "Doug Ross",
+    "specialty" : "Pediatrics",
+    "price"     : 75,
+    "hospital"  : "County General in Chicago"
+  },
+  {
+    "category"  : "Cardiologist",
+    "doctor"    : "J.D. Dorian",
+    "specialty" : "Surgery",
+    "price"     : 80,
+    "hospital"  : "Sacred Heart in California"
+  },
+  {
+    "category"  : "Pulmonologist",
+    "doctor"    : "Greg House",
+    "specialty" : "Nephrology and infectious disease",
+    "price"     : 200,
+    "hospital"  : "Princeton Plainsboro in New Jersey"
+  },
+  {
+    "category"  : "Orthopedic",
+    "doctor"    : "Jack Shephard",
+    "specialty" : "Spinal surgery",
+    "price"     : 270,
+    "hospital"  : "St. Sebastian in Lost"
+  },
+  {
+    "category"  : "Surgical visit",
+    "doctor"    : "Miranda Bailey",
+    "specialty" : "Surgery",
+    "price"     : 180,
+    "hospital"  : "Seattle Grace"
+  },
+  {
+    "category"  : "Unconventional",
+    "doctor"    : "John Watson",
+    "specialty" : "Firearms injuries",
+    "price"     : 20,
+    "hospital"  : "Baker St London"
+  },
+  {
+    "category"  : "Surgical visit",
+    "doctor"    : "Christopher Turk",
+    "specialty" : "Surgery",
+    "price"     : 95,
+    "hospital"  : "Sacred Heart in California"
+  },
+  {
+    "category"  : "Surgical visit",
+    "doctor"    : "Hawkeye Pierce",
+    "specialty" : "Surgery",
+    "price"     : 75,
+    "hospital"  : " 4077th Army Surgical, South Korea"
+  },
+  {
+    "category"  : "Plastic Surgery",
+    "doctor"    : "Christian Troy",
+    "specialty" : "Plastic Surgery",
+    "price"     : 130,
+    "hospital"  : "FX Nip and Tuck"
+  },
+  {
+    "category"  : "Plastic Surgery",
+    "doctor"    : "Sean McNamara",
+    "specialty" : "Plastic surgery",
+    "price"     : 130,
+    "hospital"  : "FX Nip and Tuck"
+  },
+  {
+    "category"  : "Surgical visit",
+    "doctor"    : "Derek Shepherd",
+    "specialty" : "Neurosurgery",
+    "price"     : 130,
+    "hospital"  : "Seattle Grace"
+  }
+]
