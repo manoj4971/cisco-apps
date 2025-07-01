@@ -1,0 +1,403 @@
+{
+  "confValid": true,
+  "errors": [],
+  "activated": true,
+  "pollingEnabled": true,
+  "saveAutomationWorknotes": true,
+  "saveActivityInPlugin": true,
+  "supportsHistory": true,
+  "groups": [
+    {
+      "id": "GENERAL_JIRA_SETTINGS",
+      "displayName": "General Settings",
+      "displayOrder": 0,
+      "collapsed": false
+    },
+    {
+      "id": "BUG_JIRA_SETTINGS",
+      "displayName": "Bug Settings",
+      "displayOrder": 1,
+      "collapsed": true
+    },
+    {
+      "id": "SREQUEST_JIRA_SETTINGS",
+      "displayName": "Service Request Settings",
+      "displayOrder": 2,
+      "collapsed": true
+    },
+    {
+      "id": "SECURITY_BASIC_JIRA_SETTINGS",
+      "displayName": "Basic Authentication Settings",
+      "displayOrder": 3,
+      "collapsed": true
+    },
+    {
+      "id": "SECURITY_OAUTH_JIRA_SETTINGS",
+      "displayName": "Oauth Authentication Settings",
+      "displayOrder": 4,
+      "collapsed": true
+    }
+  ],
+  "fields": [
+    {
+      "id": "JIRA_FILTERS_BUG",
+      "value": "{\"jql\":\"\\\"cf[18514]\\\"IN(10280,10413,10447,10465,13283,13284,13288,14453,14732,14733,14734,15453,16281,16283,16284,16339,16340,17557,17997,17998,17999,18000,18002,19052,22793,24939,24993,26543,26544,26594,27065,27271,27441,27673,27948,28110,28111,28112,28113,28253,28254,28255,28256,28257,28258,28260,28319,28404,28830,29083) AND environment ~ \\\"Prod\\\" AND assignee in membersOf(\\\"team_ACN_ERPatMotion\\\") OR project IN(61561,62034,62053,62915,62933,63314, 63316,63319,64526,64537,63618,64513) AND environment ~ \\\"Prod\\\" AND assignee in membersOf(\\\"team_ACN_ERPatMotion\\\")\"}",
+      "field": {
+        "name": "JIRA_FILTERS_BUG",
+        "displayName": "Jira filters for Bug",
+        "type": "json",
+        "description": "Json format. Use \\\" for quotation marks needed on filter",
+        "defaultValue": null,
+        "groupId": "BUG_JIRA_SETTINGS",
+        "displayOrder": 3,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_SECRET",
+      "value": "******",
+      "field": {
+        "name": "JIRA_SECRET",
+        "displayName": "Secret",
+        "type": "password",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "SECURITY_OAUTH_JIRA_SETTINGS",
+        "displayOrder": 1,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_ACCESSTOKEN",
+      "value": "******",
+      "field": {
+        "name": "JIRA_ACCESSTOKEN",
+        "displayName": "Access Token",
+        "type": "password",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "SECURITY_OAUTH_JIRA_SETTINGS",
+        "displayOrder": 4,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_USERNAME",
+      "value": "robot_MyWizard_TIT",
+      "field": {
+        "name": "JIRA_USERNAME",
+        "displayName": "Username",
+        "type": "string",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "SECURITY_BASIC_JIRA_SETTINGS",
+        "displayOrder": 1,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_REQUESTTOKEN",
+      "value": "******",
+      "field": {
+        "name": "JIRA_REQUESTTOKEN",
+        "displayName": "Request Token",
+        "type": "password",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "SECURITY_OAUTH_JIRA_SETTINGS",
+        "displayOrder": 5,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_FIELDS_SREQUEST",
+      "value": "project,summary,description,assignee,issuetype,customfield_18514,key,resolutiondate,customfield_12810,priority,status,issuelinks,labels,customfield_10723,customfield_58710,fixVersions,resolution,customfield_10741,customfield_22852,customfield_12810,customfield_12811,customfield_10014,created,updated,reporter,customfield_77511,customfield_77510",
+      "field": {
+        "name": "JIRA_FIELDS_SREQUEST",
+        "displayName": "Jira Fields for Service Request",
+        "type": "string",
+        "description": "If not set, The following are used by default key,summary,components,issuetype,updated,status,description,project,assignee",
+        "defaultValue": null,
+        "groupId": "SREQUEST_JIRA_SETTINGS",
+        "displayOrder": 4,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_SREQ_PROJECT_ITYPES",
+      "value": "{\"story\":\"STP,CL2\"}",
+      "field": {
+        "name": "JIRA_SREQ_PROJECT_ITYPES",
+        "displayName": "Jira Project Filter By Issue Type",
+        "type": "json",
+        "description": "{\"issueType1\":\"ProjectId1,ProjectId2\",\"issueType2\":\"ProjectId3,ProjectId4\"}",
+        "defaultValue": null,
+        "groupId": "SREQUEST_JIRA_SETTINGS",
+        "displayOrder": 7,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_PROJECTS_BUG",
+      "value": "ALMV,ALPS,ALMVB,ARCHIVE,CMUT,CPS,DHCCDKK,DHCLT1,DHCLT2,DHCLT3,DHCLT5,DHCLT7,DIGHUBCL,DSSAPAAS,EDM,ELOG,FILO,FINANCE,GAL,GTP,GRM,HRCORE,HRENABLING,HRRPG,IHDBPRIMA,NGO,OFISYST,ONESOLMA,ORCA,PSL,PRIMA,PLMPRIMA,RA,SAPRSHOP,SAPSEC,SCS,SOLMAN,SPRM,TM,WWS",
+      "field": {
+        "name": "JIRA_PROJECTS_BUG",
+        "displayName": "Jira Project keys for Bug",
+        "type": "string",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "BUG_JIRA_SETTINGS",
+        "displayOrder": 1,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": true
+      }
+    },
+    {
+      "id": "JIRA_SREQUEST_EPIC",
+      "value": "\"cf[77510]\"=\"Maintenance\"",
+      "field": {
+        "name": "JIRA_SREQUEST_EPIC",
+        "displayName": "Jql filter for internal epic request",
+        "type": "string",
+        "description": "This filter will be used for getting the epics keys",
+        "defaultValue": null,
+        "groupId": "SREQUEST_JIRA_SETTINGS",
+        "displayOrder": 1,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_HOMEURL",
+      "value": "https://jira.telekom.de",
+      "field": {
+        "name": "JIRA_HOMEURL",
+        "displayName": "Jira Url",
+        "type": "string",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "GENERAL_JIRA_SETTINGS",
+        "displayOrder": 2,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": true
+      }
+    },
+    {
+      "id": "JIRA_DESCRIPTION",
+      "value": null,
+      "field": {
+        "name": "JIRA_DESCRIPTION",
+        "displayName": "Enable Get Ticket Description Request",
+        "type": "boolean",
+        "description": "Enable request to fields, Statuses and CreateMeta",
+        "defaultValue": null,
+        "groupId": "GENERAL_JIRA_SETTINGS",
+        "displayOrder": 4,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_PASSWORD",
+      "value": "******",
+      "field": {
+        "name": "JIRA_PASSWORD",
+        "displayName": "Password",
+        "type": "password",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "SECURITY_BASIC_JIRA_SETTINGS",
+        "displayOrder": 2,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_FILTERS_SREQUEST",
+      "value": "",
+      "field": {
+        "name": "JIRA_FILTERS_SREQUEST",
+        "displayName": "Jira Filter By Issue Type",
+        "type": "json",
+        "description": "Json Format. Use \\\" for quotation marks needed on filter",
+        "defaultValue": null,
+        "groupId": "SREQUEST_JIRA_SETTINGS",
+        "displayOrder": 5,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_SREQUEST_ISSUE_TYPES",
+      "value": "story",
+      "field": {
+        "name": "JIRA_SREQUEST_ISSUE_TYPES",
+        "displayName": "Jira Issue Types To Fetch",
+        "type": "string",
+        "description": "Comma separated list",
+        "defaultValue": null,
+        "groupId": "SREQUEST_JIRA_SETTINGS",
+        "displayOrder": 3,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": true
+      }
+    },
+    {
+      "id": "JIRA_AUTHTYPE",
+      "value": "BASIC",
+      "field": {
+        "name": "JIRA_AUTHTYPE",
+        "displayName": "Authentication Method",
+        "type": "dropdown",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "GENERAL_JIRA_SETTINGS",
+        "displayOrder": 1,
+        "coreData": false,
+        "editable": true,
+        "values": [
+          "BASIC",
+          "OAUTH"
+        ],
+        "mandatory": true
+      }
+    },
+    {
+      "id": "JIRA_FIELDS_BUG",
+      "value": "key,summary,components,issuetype,updated,status,description,project,assignee",
+      "field": {
+        "name": "JIRA_FIELDS_BUG",
+        "displayName": "Jira fields for Bug",
+        "type": "string",
+        "description": "If not set, next are used by default key,summary,components,issuetype,updated,status,description,project,assignee",
+        "defaultValue": null,
+        "groupId": "BUG_JIRA_SETTINGS",
+        "displayOrder": 2,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_CONSUMERKEY",
+      "value": "******",
+      "field": {
+        "name": "JIRA_CONSUMERKEY",
+        "displayName": "Consumer key",
+        "type": "password",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "SECURITY_OAUTH_JIRA_SETTINGS",
+        "displayOrder": 2,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_CHARACTERS",
+      "value": "\\A[ \\s\\p{C}\\p{Zs}]+|[ \\s\\p{C}\\p{Zs}]+\\z",
+      "field": {
+        "name": "JIRA_CHARACTERS",
+        "displayName": "Characters to Remove from Jira Fields",
+        "type": "string",
+        "description": "Java Regex Expression used for deleting special characters from Jira fields. They will be replaced by an empty string",
+        "defaultValue": null,
+        "groupId": "GENERAL_JIRA_SETTINGS",
+        "displayOrder": 3,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_PRIVATEKEY",
+      "value": "******",
+      "field": {
+        "name": "JIRA_PRIVATEKEY",
+        "displayName": "Private Key",
+        "type": "password",
+        "description": null,
+        "defaultValue": null,
+        "groupId": "SECURITY_OAUTH_JIRA_SETTINGS",
+        "displayOrder": 3,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_JQL_FILTERS",
+      "value": null,
+      "field": {
+        "name": "JIRA_JQL_FILTERS",
+        "displayName": "JQL Jira Filter By Issue Type",
+        "type": "json",
+        "description": "{\"issueType1\":\"filter\",\"issueType2\":\"filter\"}",
+        "defaultValue": null,
+        "groupId": "SREQUEST_JIRA_SETTINGS",
+        "displayOrder": 6,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    },
+    {
+      "id": "JIRA_SREQUEST_SWITCH",
+      "value": "true",
+      "field": {
+        "name": "JIRA_SREQUEST_SWITCH",
+        "displayName": "Use internal epic request",
+        "type": "boolean",
+        "description": "If turn on, it will add Epic link to each  issue type jql filter",
+        "defaultValue": null,
+        "groupId": "SREQUEST_JIRA_SETTINGS",
+        "displayOrder": 2,
+        "coreData": false,
+        "editable": true,
+        "values": [],
+        "mandatory": false
+      }
+    }
+  ]
+}
